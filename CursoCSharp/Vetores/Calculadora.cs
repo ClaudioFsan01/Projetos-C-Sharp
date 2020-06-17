@@ -81,6 +81,26 @@ namespace Vetores
 
         }
 
+        // Modificador de parametro ref => faz o parametro ser uma referencia para a variavel original passada no parametro tambem com a palavra ref 
+        // Funciona como um ponteiro
+        //ex:
+
+        public static void Triple(ref int valor)  
+        {
+            valor = valor * 3;
+        }
+
+        /*Modificador de parametro (out) => É similar ao modificador ref (faz o parametro ser uma referencia para a variavel original),
+         mas não exige que a variavel original seja iniciada.
+         
+            OBS : Tanto ref quanto out são considerados design ruim e devem ser evitados 
+         
+        */
+
+        public static void Triple(int valor, out int resul)
+        {
+            resul = valor * 3;
+        }
 
 
 

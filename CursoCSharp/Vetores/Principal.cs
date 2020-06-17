@@ -12,7 +12,7 @@ namespace Vetores
         static void Main(string[] args)
         {
 
-            //ExecutarCalculadora();
+            ExecutarCalculadora();
 
             Produto p = null;
             Produto[] produtos = CriarArrayProdutos();
@@ -179,7 +179,24 @@ namespace Vetores
             Console.WriteLine(Calculadora.Sum( 2.5, 4.5, 13.4 ));
             //Console.WriteLine(Calculadora.Sum(new String[] { "Claudio", "Fatima", "Zuila", "Bibiu" }));
             Console.WriteLine(Calculadora.Sum("Claudio", "Fatima", "Zuila", "Bibiu" ));
+
+            int x = 10;
+
+            Calculadora.Triple(ref x); // informando no parametro com a palavra ref a variavel que será referenciada 
+
+            Console.WriteLine(x);
+
+            int valor = 10;
+            int result; // com o modificador out não é obrigatorio iniciar a variavel resul
+
+            Calculadora.Triple(valor, out result);
+
+            Console.WriteLine(result);
+
+
         }
+
+
 
         public static void AdicionarProduto(Produto p)
         {
