@@ -11,14 +11,18 @@ namespace Vetores
     {
         static void Main(string[] args)
         {
+
+            //ExecutarCalculadora();
+
             Produto p = null;
-            Produto[] produtos = null;
-            int op = 0, i=0;
+            Produto[] produtos = CriarArrayProdutos();
+            int op = 0, i = 0;
 
             //ManipularVetores mv = new ManipularVetores();
-           // mv.criarVetorInteiros();
-           // mv.criarVetorDouble();
-          //  mv.criarVetorString();
+            // mv.criarVetorInteiros();
+            // mv.criarVetorDouble();
+            //  mv.criarVetorString();
+
 
             do
             {
@@ -33,7 +37,7 @@ namespace Vetores
                             {
                                 CadastrarProduto(p, produtos, i);
 
-                                Console.WriteLine("Deseja continuar o cadastro de produto (1-sim) (2-não) \n");
+                                Console.WriteLine("Deseja cadastrar outro produto (1-sim) (2-não) \n");
                                 op = int.Parse(Console.ReadLine());
                                 i++;
                             } while (op != 2);
@@ -49,12 +53,16 @@ namespace Vetores
                         catch (ArgumentException e)
                         {
                             Console.WriteLine(e.Message);
-                        }                       
+                        }
+                        catch (IndexOutOfRangeException e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
                         catch (Exception e)
                         {
                             Console.WriteLine(e.Message);
                         }
-                       
+
 
                         break;
                     case 2:
@@ -68,7 +76,7 @@ namespace Vetores
 
                     case 4:
 
-                      
+
                         break;
 
                     case 5:
@@ -94,8 +102,8 @@ namespace Vetores
                 "1- Cadastrar Produto : \n" +
                 "2- Adicionar Produto : \n" +
                 "3- Remover Produto : \n" +
-                "4- Relatorio de produtos \n"+
-                "5-  "+
+                "4- Relatorio de produtos \n" +
+                "5-  " +
                 "6- Sair \n");
 
             return int.Parse(Console.ReadLine());
@@ -103,40 +111,46 @@ namespace Vetores
 
         public static void CadastrarProduto(Produto p, Produto[] produtos, int pos)
         {
-           
-                Console.WriteLine(" Entre com os dados do Produto \n");
 
-              
-                Console.WriteLine(" Entre com o preço do produto :");
-                double preco = Double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
-                // p.SetPreco(Double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture));
+            Console.WriteLine(" Entre com os dados do Produto \n");
 
-                Console.WriteLine(" Entre com a quantidade do estoque do produto :");
-                int qtdEstoque = int.Parse(Console.ReadLine());
-                //p.SetQtdEmEstoque(int.Parse(Console.ReadLine()));
 
-                p = new Produto(preco, qtdEstoque);
+            Console.WriteLine(" Entre com o preço do produto :");
+            double preco = Double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+            // p.SetPreco(Double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture));
 
-               Console.WriteLine(" Entre com o nome do produto :");
-               p.Nome = Console.ReadLine();
+            Console.WriteLine(" Entre com a quantidade do estoque do produto :");
+            int qtdEstoque = int.Parse(Console.ReadLine());
+            //p.SetQtdEmEstoque(int.Parse(Console.ReadLine()));
 
-              if(produtos == null)
-              {
-                produtos = RetornarArrayProdutos();
-              }
-            produtos[pos] = p;
+            p = new Produto(preco, qtdEstoque);
+
+            Console.WriteLine(" Entre com o nome do produto :");
+            p.Nome = Console.ReadLine();
+
+
+            if (pos < produtos.Length)
+            {
+                produtos[pos] = p;
+
+            }
+            else
+            {
+                throw new IndexOutOfRangeException(" Operação invalida ! Tentativa de adicionar quantidade de produtos superior à capacidade. \n");
+            }
+
 
             //MostrarProduto(p);
             ExibirProduto(p);
-                //AdicionarProduto(p);
-               // RemoverProduto(p);
-           
-           
+            //AdicionarProduto(p);
+            // RemoverProduto(p);
+
+
         }
 
-        public static Produto[] RetornarArrayProdutos()
+        public static Produto[] CriarArrayProdutos()
         {
-            Console.WriteLine(" Entre com o tamanho n do vetor : \n");
+            Console.WriteLine(" Entre com a quantidade de produtos que serão cadastrados : \n");
             int n = int.Parse(Console.ReadLine());
 
             return new Produto[n];
@@ -145,7 +159,7 @@ namespace Vetores
         public static void ExibirArrayProdutos(Produto[] produtos)
         {
             Console.WriteLine(" Relatorio de produtos : \n");
-            for (int i=0; i< produtos.Length; i++)
+            for (int i = 0; i < produtos.Length; i++)
             {
                 Console.WriteLine(produtos[i].Nome);
                 Console.WriteLine(produtos[i].Preco);
@@ -154,6 +168,17 @@ namespace Vetores
                 Console.WriteLine("--------------------");
 
             }
+        }
+
+        public static void ExecutarCalculadora(){
+
+            //Console.WriteLine(Calculadora.Sum(new int[] { 1, 4, 5, 10})); sem usar  a palavra params no parametro do método Sum na classe Calculadora
+            Console.WriteLine(Calculadora.Sum( 1, 4, 5, 10 )); // utilizando a palavra params no parametro do método Sum na classe Calculadora
+
+            // Console.WriteLine(Calculadora.Sum(new double[] { 2.5, 4.5, 13.4 })); sem usar  a palavra params no parametro do método Sum na classe Calculadora
+            Console.WriteLine(Calculadora.Sum( 2.5, 4.5, 13.4 ));
+            //Console.WriteLine(Calculadora.Sum(new String[] { "Claudio", "Fatima", "Zuila", "Bibiu" }));
+            Console.WriteLine(Calculadora.Sum("Claudio", "Fatima", "Zuila", "Bibiu" ));
         }
 
         public static void AdicionarProduto(Produto p)
