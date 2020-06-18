@@ -12,11 +12,16 @@ namespace Heranca
         static void Main(string[] args)
         {
 
-           // ExecutarCalculadora();
+            // ExecutarCalculadora();
+
+            Produto pn = new ProdutoNacional(20.00, 2, 0.02);
+            Produto pi = new ProdutoImportado(50.00, 1, 0.5);
+            UpcastingDowcasting(pn, pi);
 
             Produto p = null;
             Produto[] produtos = CriarArrayProdutos();
             int op = 0, i = 0;
+          
 
             //ManipularVetores mv = new ManipularVetores();
             // mv.criarVetorInteiros();
@@ -197,6 +202,75 @@ namespace Heranca
         }
         */
 
+        public static void UpcastingDowcasting(Produto pn, Produto pi)
+        {
+            // DOWCASTING 
+
+            /* ProdutoNacional pn2 = pn; nesse caso ocorre um erro pois o compilador não sabe que a variavel pn 
+           do tipo Produto faz referencia a um  objeto do tipo ProdutoNacional sendo necessario casting. */
+            // fazendo dowcasting 
+            ProdutoNacional pn2 = (ProdutoNacional)pn;
+
+            ExibirProduto(pn2);
+
+            ProdutoImportado pi2 = (ProdutoImportado)pi;
+
+            ExibirProduto(pi2);
+
+            /*É necessario muito cuidado ao fazer DOWCASTING pois devemos verificar o tipo do objeto ao qual a variavel faz referencia.
+             * Caso contrario pode ocorrer erro. ex:*/
+
+            /* ProdutoImportado pn3 = (ProdutoImportado)pn;  erro pois nesse caso a variavel pn não faz referencia a um objeto do tipo ProdutoImportado
+             e sim a um objeto do tipo ProdutoNacional. Nesse caso é necessario fazer uma verificação confome o exemplo a seguir : */
+
+            //verificando o tipo do objeto à qual a variavel faz referencia com a palavra (is)
+
+            if (pn is ProdutoImportado)
+            {
+                ProdutoImportado pi3 = (ProdutoImportado)pn;
+            }
+            else
+            {
+                Console.WriteLine(" Erro, a variavel pn do tipo Produto não faz referencia a um objeto do tipo ProdutoImportado ");
+            }
+
+            if(pi is ProdutoNacional)
+            {
+                ProdutoNacional pn3 = (ProdutoNacional)pi;
+            }
+            else
+            {
+                Console.WriteLine(" Erro, a variavel pi do tipo Produto não faz referencia a um objeto do tipo ProdutoNacional ");
+            }
+
+
+                       
+            if(pn is ProdutoNacional)
+            {
+                // forma opcional de fazer o casting(neste caso dowcasting) utilizando a palavra (as)
+                // ProdutoNacional pn4 = (ProdutoNacional)pn;
+                ProdutoNacional pn4 = pn as ProdutoNacional;
+                MostrarProduto(pn4);
+            }
+            else
+            {
+                Console.WriteLine(" Erro, a variavel pn do tipo Produto não faz referencia a um objeto do tipo ProdutoNacional ");
+            }
+
+            if(pi is ProdutoImportado)
+            {
+                //ProdutoImportado pi4 = (ProdutoImportado)pi;
+                ProdutoImportado pi4 = pi as ProdutoImportado;
+                MostrarProduto(pi4);
+            }
+            else
+            {
+                Console.WriteLine(" Erro, a variavel pi do tipo Produto não faz referencia a um objeto do tipo ProdutoImportado ");
+            }
+
+
+
+        }
 
         public static void AdicionarProduto(Produto p)
         {

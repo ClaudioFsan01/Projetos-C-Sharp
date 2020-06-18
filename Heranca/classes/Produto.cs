@@ -45,7 +45,15 @@ namespace Heranca
     public Produto(double preco) : this() 
     {
             //_preco = preco;
-            Preco = preco;
+            if(preco > 0)
+            {
+                Preco = preco;
+            }
+            else
+            {
+                Console.WriteLine("Preço invalido ! \n");
+            }
+          
     }
      
         /*
@@ -57,7 +65,7 @@ namespace Heranca
 
       public Produto(double preco, int qtdEstoque) : this(preco)
       {
-            if(preco>0 && qtdEstoque >= 0)
+            if(qtdEstoque >= 0)
             {
                 //_preco = preco;
                 //_qtdEstoque = qtdEstoque;               
