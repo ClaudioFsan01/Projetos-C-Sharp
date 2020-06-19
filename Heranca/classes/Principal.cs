@@ -18,7 +18,7 @@ namespace Heranca
            // Produto pi = new ProdutoImportado(50.00, 1, 0.5);
            // UpcastingDowcasting(pn, pi);
 
-            Produto p = null;
+            Produto produto = null;
             Produto[] produtos = CriarArrayProdutos();
             int op = 0, i = 0;
           
@@ -41,14 +41,14 @@ namespace Heranca
                             do
                             {
                                 //p = new ProdutoNacional();
-                                CadastrarProduto(p, produtos, i);
+                                CadastrarProduto(produto, produtos, i);
 
                                 Console.WriteLine("Deseja cadastrar outro produto (1-sim) (2-não) \n");
                                 op = int.Parse(Console.ReadLine());
                                 i++;
                             } while (op != 2);
 
-                            ExibirArrayProdutos(produtos);
+                            ExibirArrayProdutos(produtos, produto);
 
 
                         }
@@ -86,6 +86,7 @@ namespace Heranca
                         break;
 
                     case 5:
+                        ExibirArrayProdutos(produtos, produto);
 
                         break;
 
@@ -115,38 +116,56 @@ namespace Heranca
             return int.Parse(Console.ReadLine());
         }
 
-        public static void CadastrarProduto(Produto p, Produto[] produtos, int pos)
+        public static void CadastrarProduto(Produto produto, Produto[] produtos, int pos)
         {
+            Console.WriteLine(" Cadastrar Produto (1- Nacional) ou (2- Importado)\n");
+            int opcao = int.Parse(Console.ReadLine()); 
+
             Console.WriteLine(" Entre com os dados do Produto \n");
-
-
+                       
             Console.WriteLine(" Entre com o preço do produto :");
-            double preco = Double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+            decimal preco = decimal.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
             // p.SetPreco(Double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture));
 
             Console.WriteLine(" Entre com a quantidade do estoque do produto :");
             int qtdEstoque = int.Parse(Console.ReadLine());
             //p.SetQtdEmEstoque(int.Parse(Console.ReadLine()));
 
-            p = new Produto(preco, qtdEstoque);
+            if(opcao == 1)
+            {
+                Console.WriteLine(" Entre com o valor da taxa de imposto do produto nacional :");
+                decimal impostoNacional = decimal.Parse(Console.ReadLine());
+                string.Format("{0:00.00}", impostoNacional);
+                produto = new ProdutoNacional(preco, qtdEstoque, impostoNacional);
+            }
+            else
+            {
+                Console.WriteLine(" Entre com o valor da taxa de imposto do produto importado :");
+                decimal impostoImportado = decimal.Parse(Console.ReadLine());
+
+                String.Format("{0:00.00}", impostoImportado);
+
+                produto = new ProdutoImportado(preco, qtdEstoque, impostoImportado);
+
+            }           
 
             Console.WriteLine(" Entre com o nome do produto :");
-            p.Nome = Console.ReadLine();
+            produto.Nome = Console.ReadLine();
 
 
             if (pos < produtos.Length)
             {
-                produtos[pos] = p;
+                produtos[pos] = produto;
 
             }
             else
             {
-                throw new IndexOutOfRangeException(" Operação invalida ! Tentativa de adicionar quantidade de produtos superior à capacidade. \n");
+                throw new IndexOutOfRangeException(" Operação invalida ! Tentativa de adicionar quantidade de produtos superior à capacidade de estoque. \n");
             }
 
 
             //MostrarProduto(p);
-            ExibirProduto(p);
+            ExibirProduto(produto);
             //AdicionarProduto(p);
             // RemoverProduto(p);
             /*
@@ -174,19 +193,25 @@ namespace Heranca
             return new Produto[n];
         }
 
-        public static void ExibirArrayProdutos(Produto[] produtos)
+        public static void ExibirArrayProdutos(Produto[] produtos, Produto produto)
         {
             Console.WriteLine(" Relatorio de produtos : \n");
             for (int i = 0; i < produtos.Length; i++)
             {
+
+                produto = produtos[i];
+                ExibirProduto(produto);
+
+                /*
                 Console.WriteLine(produtos[i].Nome);
                 Console.WriteLine(produtos[i].Preco);
                 Console.WriteLine(produtos[i].QtdEstoque);
                 Console.WriteLine("--------------------");
                 Console.WriteLine("--------------------");
-
+                */
             }
         }
+
         /*
         public static void ExecutarCalculadora(){
 
@@ -263,7 +288,7 @@ namespace Heranca
                 // forma opcional de fazer o casting(neste caso dowcasting) utilizando a palavra (as)
                 // ProdutoNacional pn4 = (ProdutoNacional)pn;
                 ProdutoNacional pn4 = pn as ProdutoNacional;
-                MostrarProduto(pn4);
+                ExibirProduto(pn4);
             }
             else
             {
@@ -274,7 +299,8 @@ namespace Heranca
             {
                 //ProdutoImportado pi4 = (ProdutoImportado)pi;
                 ProdutoImportado pi4 = pi as ProdutoImportado;
-                MostrarProduto(pi4);
+                ExibirProduto(pi4);
+               // MostrarProduto(pi4);
             }
             else
             {
@@ -285,40 +311,38 @@ namespace Heranca
 
         }
 
-        public static void AdicionarProduto(Produto p)
+        public static void AdicionarProduto(Produto produto)
         {
             Console.WriteLine(" Entre com a quantidade que será adicionada ao estoque : \n");
-            p.AdicionarProdutos(int.Parse(Console.ReadLine()));
+            produto.AdicionarProdutos(int.Parse(Console.ReadLine()));
             //MostrarProduto(p);
-            ExibirProduto(p);
+            ExibirProduto(produto);
 
         }
 
-        public static void RemoverProduto(Produto p)
+        public static void RemoverProduto(Produto produto)
         {
             Console.WriteLine(" Entre com a quantidade que será removida do estoque : \n");
-            p.RemoverProdutos(int.Parse(Console.ReadLine()));
-            MostrarProduto(p);
+            produto.RemoverProdutos(int.Parse(Console.ReadLine()));
+            //MostrarProduto(p);
         }
        
-         public static void ExibirProduto(Produto p)
+        
+         public static void ExibirProduto(Produto produto)
          {
             Console.WriteLine("Dados do Produto : \n");
-            Console.WriteLine(p.Nome);
-            Console.WriteLine(p.Preco);
-            Console.WriteLine(p.QtdEstoque);
+
+            Console.WriteLine(produto.ToString());
+
             //Console.Write("\n");
-
-
-
         }
-
-
+         
+        /*
         public static void MostrarProduto(Produto p)
         {
             Console.WriteLine(" Produto :" + p);
             Console.WriteLine(" \n");
-        }
+        }*/
     }
 }
 

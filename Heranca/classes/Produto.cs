@@ -30,7 +30,7 @@ namespace Heranca
        
         private protected string _nome;  // Modificador de acessor private protected permite que a propria classe e suas subclasses acessem ao atributo
         //private double _preco;
-        public double Preco { get; private protected set; }
+        public decimal Preco { get; private protected set; }
         //private int _qtdEstoque;
         public int QtdEstoque { get; private protected set; }
 
@@ -42,7 +42,7 @@ namespace Heranca
             QtdEstoque = 0;
         }
 
-        public Produto(double preco) : this() 
+        public Produto(decimal preco) : this() 
         {
             //_preco = preco;
             if(preco > 0)
@@ -63,7 +63,7 @@ namespace Heranca
             QtdEstoque = qtdEstoque;
     }*/
 
-       public Produto(double preco, int qtdEstoque) : this(preco)
+       public Produto(decimal preco, int qtdEstoque) : this(preco)
        {
             if(qtdEstoque >= 0)
             {
@@ -106,6 +106,7 @@ namespace Heranca
 
         // public int QtdEmEstoque { get { return _qtdEstoque; } }
 
+
         //Sobreposição ou sobrescrita
         //• É a implementação de um método de uma superclasse na subclasse
         /*Para que um método comum (não
@@ -115,14 +116,14 @@ namespace Heranca
         A palavra ( virtual ) em um método na super classe (classe pai) indica que o
         método pode ser sobreposto ou sobrescrito na subclasse (classe filha) com o uso da palavra override. "*/
 
-       public virtual double PrecoProdutoComTaxa()
+       public virtual decimal PrecoProdutoComTaxa()
        {
             return Preco;
        }
 
 
 
-       public virtual double ValorTotalEmEstoque()
+       public virtual decimal ValorTotalEmEstoque()
        {
         return Preco * QtdEstoque;
        }
@@ -147,19 +148,6 @@ namespace Heranca
        }
 
 
-        public override string ToString() //Retorna uma cadeira de caracteres que representa o objeto atual 
-        {//Aqui definimos como o objeto será retornado na forma de String
-         return _nome +
-            ", $ " +
-            Preco.ToString("F2", CultureInfo.InvariantCulture) +
-            " " + QtdEstoque +
-            " unidade, total : $ " +
-            ValorTotalEmEstoque().ToString("F2", CultureInfo.InvariantCulture);
-
-        }
-
-         /* * ToString - converte um objeto para String  
-         * Utilizando o método ToString podemos escolher como o objeto será representado na forma de String*/
-
+       
 }
 }
