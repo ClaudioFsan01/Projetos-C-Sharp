@@ -43,6 +43,17 @@ namespace Heranca
             }
         }
 
+        public override double ValorTotalEmEstoque()
+        {
+            return PrecoProdutoComTaxa() * QtdEstoque;
+        }
+
+        public override double PrecoProdutoComTaxa()
+        {
+            return (Preco * 0.15) + ImpostoImportacao + Preco;
+            // (base.PrecoProdutoComTaxa()*0.15) + ImpostoImportacao +base.PrecoProdutoComTaxa();
+        }
+
 
 
     }

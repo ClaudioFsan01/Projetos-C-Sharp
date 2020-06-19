@@ -14,9 +14,9 @@ namespace Heranca
 
             // ExecutarCalculadora();
 
-            Produto pn = new ProdutoNacional(20.00, 2, 0.02);
-            Produto pi = new ProdutoImportado(50.00, 1, 0.5);
-            UpcastingDowcasting(pn, pi);
+           // Produto pn = new ProdutoNacional(20.00, 2, 0.02);
+           // Produto pi = new ProdutoImportado(50.00, 1, 0.5);
+           // UpcastingDowcasting(pn, pi);
 
             Produto p = null;
             Produto[] produtos = CriarArrayProdutos();
@@ -40,6 +40,7 @@ namespace Heranca
 
                             do
                             {
+                                //p = new ProdutoNacional();
                                 CadastrarProduto(p, produtos, i);
 
                                 Console.WriteLine("Deseja cadastrar outro produto (1-sim) (2-não) \n");
@@ -105,10 +106,10 @@ namespace Heranca
         {
             Console.WriteLine(" Menu de Opções : \n" +
                 "1- Cadastrar Produto : \n" +
-                "2- Adicionar Produto : \n" +
-                "3- Remover Produto : \n" +
-                "4- Relatorio de produtos \n" +
-                "5-  " +
+                "2-  : \n" +
+                "3- Adicionar Produto  : \n" +
+                "4- Remover Produto \n" +
+                "5- Relatorio de produtos  " +
                 "6- Sair \n");
 
             return int.Parse(Console.ReadLine());
@@ -116,7 +117,6 @@ namespace Heranca
 
         public static void CadastrarProduto(Produto p, Produto[] produtos, int pos)
         {
-
             Console.WriteLine(" Entre com os dados do Produto \n");
 
 
@@ -149,9 +149,22 @@ namespace Heranca
             ExibirProduto(p);
             //AdicionarProduto(p);
             // RemoverProduto(p);
-
+            /*
+            Console.WriteLine(" Deseja cadastrar (1-Produto Nacional) ou (2- Produto Importado) ?\n");
+            if (int.Parse(Console.ReadLine()) ==1)
+            {
+                p =  OpcaoCadastro(p, produtos, pos);
+            }
+            else
+            {
+            }*/
 
         }
+        /*
+        public static void OpcaoCadastro(Produto p, Produto[] produtos, int pos)
+        {
+           
+        }*/
 
         public static Produto[] CriarArrayProdutos()
         {

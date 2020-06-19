@@ -36,14 +36,14 @@ namespace Heranca
 
     
 
-    public Produto() //Construtor padrão
-    {
+        public Produto() //Construtor padrão
+        {
             
             QtdEstoque = 0;
-    }
+        }
 
-    public Produto(double preco) : this() 
-    {
+        public Produto(double preco) : this() 
+        {
             //_preco = preco;
             if(preco > 0)
             {
@@ -54,7 +54,7 @@ namespace Heranca
                 Console.WriteLine("Preço invalido ! \n");
             }
           
-    }
+        }
      
         /*
     public Produto(double preco, int qtdEstoque) : this(preco) 
@@ -63,8 +63,8 @@ namespace Heranca
             QtdEstoque = qtdEstoque;
     }*/
 
-      public Produto(double preco, int qtdEstoque) : this(preco)
-      {
+       public Produto(double preco, int qtdEstoque) : this(preco)
+       {
             if(qtdEstoque >= 0)
             {
                 //_preco = preco;
@@ -76,7 +76,7 @@ namespace Heranca
                 Console.WriteLine(" Preco ou QtdEstoque com valor invalido ! ");
             }
 
-      }
+       }
                 
         // Properties customizada
 
@@ -98,60 +98,68 @@ namespace Heranca
               }
             }
 
-       
+
 
         //public double Preco { get { return _preco; } }
 
+
+
+        // public int QtdEmEstoque { get { return _qtdEstoque; } }
+
+        //Sobreposição ou sobrescrita
+        //• É a implementação de um método de uma superclasse na subclasse
+        /*Para que um método comum (não
+        abstrato) possa ser sobreposto, deve
+        ser incluído nele o prefixo "virtual.
         
+        A palavra ( virtual ) em um método na super classe (classe pai) indica que o
+        método pode ser sobreposto ou sobrescrito na subclasse (classe filha) com o uso da palavra override. "*/
 
-       // public int QtdEmEstoque { get { return _qtdEstoque; } }
-    
+       public virtual double PrecoProdutoComTaxa()
+       {
+            return Preco;
+       }
 
-    public double ValorTotalEmEstoque()
-    {
+
+
+       public virtual double ValorTotalEmEstoque()
+       {
         return Preco * QtdEstoque;
-    }
+       }
 
-    public void AdicionarProdutos(int quantidade)
-    {
+       public void AdicionarProdutos(int quantidade)
+       {
             QtdEstoque += quantidade;
-    }
+       }
 
-    public void RemoverProdutos(int quantidade)
-    {
-        if (quantidade <= QtdEstoque)
-        {
+       public void RemoverProdutos(int quantidade)
+       {
+         if (quantidade <= QtdEstoque)
+         {
                 QtdEstoque -= quantidade;
-        }
-        else
-        {
+         }
+         else
+         {
             Console.WriteLine(" Quantidade no estoque menor que a solicitada ! \n");
-        }
+         }
+
+  
+       }
 
 
-    }
-        //
-
-        public void CastingDowCasting()
-        {
-
-
-        }
-
-    
-    public override string ToString() //Retorna uma cadeira de caracteres que representa o objeto atual 
-    {//Aqui definimos como o objeto será retornado na forma de String
-        return _nome +
+        public override string ToString() //Retorna uma cadeira de caracteres que representa o objeto atual 
+        {//Aqui definimos como o objeto será retornado na forma de String
+         return _nome +
             ", $ " +
             Preco.ToString("F2", CultureInfo.InvariantCulture) +
             " " + QtdEstoque +
             " unidade, total : $ " +
             ValorTotalEmEstoque().ToString("F2", CultureInfo.InvariantCulture);
 
-    }
+        }
 
-    /* * ToString - converte um objeto para String  
-    * Utilizando o método ToString podemos escolher como o objeto será representado na forma de String*/
+         /* * ToString - converte um objeto para String  
+         * Utilizando o método ToString podemos escolher como o objeto será representado na forma de String*/
 
 }
 }
