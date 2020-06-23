@@ -49,7 +49,7 @@ namespace Heranca
 
         public override decimal PrecoProdutoComTaxa()
         {
-            return Preco + (Preco*ImpostoNacional); 
+            return Preco + (Preco*ImpostoNacional/100); 
                 // base.PrecoProdutoComTaxa()+ ImpostoNacional;
         }
 
@@ -61,7 +61,7 @@ namespace Heranca
             return " Codigo do Produto nacional : " + _codprodutonacional +
                 "- Nome : " + _nome +
                 "- Preço sem a taxa : $ " + Preco.ToString("F2", CultureInfo.InvariantCulture) +
-                "- Taxa de Imposto nacional : $ " + ImpostoNacional.ToString("0.00", CultureInfo.InvariantCulture) +
+                "- Taxa de Imposto nacional : " + ImpostoNacional.ToString(CultureInfo.InvariantCulture) +" % "+
                 "- Preço com a taxa : $ " + PrecoProdutoComTaxa().ToString("F2", CultureInfo.InvariantCulture)+
                "- Quantidade em estoque : " + QtdEstoque +
                "- Valor total em estoque : $ " + ValorTotalEmEstoque().ToString("F2", CultureInfo.InvariantCulture);

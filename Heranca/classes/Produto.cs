@@ -24,11 +24,11 @@ using System.Globalization;
 
 namespace Heranca
 {
-    class Produto
+    public class Produto
     {
              
        
-        private protected string _nome;  // Modificador de acessor private protected permite que a propria classe e suas subclasses acessem ao atributo
+        private protected string _nome;  // Modificador de acesso private protected permite que a propria classe e suas subclasses(no mesmo projeto) acessem o atributo
         //private double _preco;
         public decimal Preco { get; private protected set; }
         //private int _qtdEstoque;

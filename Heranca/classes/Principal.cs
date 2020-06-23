@@ -118,7 +118,7 @@ namespace Heranca
 
         public static void CadastrarProduto(Produto produto, Produto[] produtos, int pos)
         {
-            Console.WriteLine(" Cadastrar Produto (1- Nacional) ou (2- Importado)\n");
+            Console.WriteLine(" Cadastrar Produto (1- Nacional) ou (2- Importado) (3- Importado Chines)\n");
             int opcao = int.Parse(Console.ReadLine()); 
 
             Console.WriteLine(" Entre com os dados do Produto \n");
@@ -133,19 +133,36 @@ namespace Heranca
 
             if(opcao == 1)
             {
-                Console.WriteLine(" Entre com o valor da taxa de imposto do produto nacional :");
+                Console.WriteLine(" Entre com o valor da taxa de imposto(%) do produto nacional :");
                 decimal impostoNacional = decimal.Parse(Console.ReadLine());
-                string.Format("{0:00.00}", impostoNacional);
+                //string.Format("{0:00.00}", impostoNacional);
                 produto = new ProdutoNacional(preco, qtdEstoque, impostoNacional);
             }
             else
             {
-                Console.WriteLine(" Entre com o valor da taxa de imposto do produto importado :");
-                decimal impostoImportado = decimal.Parse(Console.ReadLine());
+                if(opcao == 2)
+                {
+                    Console.WriteLine(" Entre com o valor da taxa de imposto(%) do produto importado :");
+                    decimal impostoImportado = decimal.Parse(Console.ReadLine());
 
-                String.Format("{0:00.00}", impostoImportado);
+                    // String.Format("{0:00.00}", impostoImportado);
 
-                produto = new ProdutoImportado(preco, qtdEstoque, impostoImportado);
+                    produto = new ProdutoImportado(preco, qtdEstoque, impostoImportado);
+
+                }
+                else
+                {
+
+                    Console.WriteLine(" Entre com o valor da taxa de imposto(%) do produto importado Chines :");
+                    decimal impostoImportadoChines = decimal.Parse(Console.ReadLine());
+
+                    // String.Format("{0:00.00}", impostoImportado);
+
+                    produto = new ProdutoImportadoChines(preco, qtdEstoque, impostoImportadoChines);
+
+
+                }
+
 
             }           
 
