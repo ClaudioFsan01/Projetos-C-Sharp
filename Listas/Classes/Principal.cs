@@ -21,8 +21,8 @@ Cada nó em um objeto de LinkedList<T> é do tipo LinkedListNode<T>. Como o Link
 cada nó aponta para o nó de Next e volta para o nó de Previous.
 --------------------------------------------------------------
 
-Queue<T> : Representa uma coleção primeiro a entrar, primeiro a sair de objetos (FILA), implementa as interfaces 
-public class Queue<T> : System.Collections.Generic.IEnumerable<T>, System.Collections.Generic.IReadOnlyCollection<T>, System.Collections.ICollection
+Queue<T> : Representa uma coleção primeiro a entrar, primeiro a sair de objetos (FILA).
+public class Queue<T> : implementa as interfaces System.Collections.Generic.IEnumerable<T>, System.Collections.Generic.IReadOnlyCollection<T>, System.Collections.ICollection
 -------------------------------------------------------------------
 
 Ambas as classes List<T> e LinkedList<T> implementam a interface ICollection<T> 
@@ -63,7 +63,7 @@ namespace Listas
                             do
                             {
                                
-                                CadastrarProduto(produto);
+                                CadastrarProduto(produto, gp);
 
                                 Console.WriteLine("Deseja cadastrar outro produto (1-sim) (2-não) \n");
                                 op = int.Parse(Console.ReadLine());
@@ -111,13 +111,14 @@ namespace Listas
                         break;
 
                     case 5:
-                        ExibirRelatorio();
+                        ExibirRelatorio(gp);
 
                         break;
 
                     case 6:
 
                         Console.WriteLine(" Total de tipos de produtos criados : "+Produto.ControleDeTiposProdutos);
+                        exibirTotalDeTributoDeImportados(TTProdutoImportado);
                         Console.WriteLine(" Programa encerrado ! \n");
                         break;
                 }
@@ -134,7 +135,7 @@ namespace Listas
         {
             Console.WriteLine(" Menu de Opções : \n" +
                 "1- Cadastrar Produto : \n" +
-                "2- Total de tributos de importação : \n" +
+                "2- Total de tributos de importação arrecadado: \n" +
                 "3- Adicionar Produto  : \n" +
                 "4- Remover Produto \n" +
                 "5- Relatorio de produtos  " +
@@ -143,7 +144,7 @@ namespace Listas
             return int.Parse(Console.ReadLine());
         }
 
-        public static void CadastrarProduto(Produto produto)
+        public static void CadastrarProduto(Produto produto, GerenciarProdutos gp)
         {
             Console.WriteLine(" Cadastrar Produto (1- Nacional) ou (2- Importado) (3- Importado Chines)\n");
             int opcao = int.Parse(Console.ReadLine()); 
@@ -198,9 +199,10 @@ namespace Listas
           
             //MostrarProduto(p);
             ExibirProduto(produto);
+            InserirProduto(produto,gp);
             //AdicionarProduto(produto);
             // RemoverProduto(p);
-          
+
         }
 
         public static void InserirProduto(Produto produto, GerenciarProdutos gp)
@@ -208,7 +210,7 @@ namespace Listas
             Console.WriteLine(" Deseja inserir o tipo de Produto (1-Lista simples) (2-Lista Duplamente Vinculada) (3- Fila): \n");
              gp.InserirTipoDeProduto(produto, int.Parse(Console.ReadLine()));
             //MostrarProduto(p);
-            ExibirProduto(produto);
+            //ExibirProduto(produto);
 
         }
 
@@ -244,18 +246,66 @@ namespace Listas
             Console.WriteLine(" Deseja exibir relatorio de (1-Lista simples) (2-Lista Duplamente Vinculada) (3- Fila): \n");
             int op = int.Parse(Console.ReadLine());
             if (op==1){
-                //RetornarListaSimples();
+                if(gp.RetornarListaSimples() != null)
+                {
+                    ExibirListaSimples(gp.RetornarListaSimples());
+                }
+                else
+                {
+                    Console.WriteLine(" Lista simples vazia !");
+                }
+                
             }
             else
             {
                 if(op == 2)
                 {
-                    //RetornarListaDuplamenteVinculada()
+                    if(gp.RetornarListaDuplamenteVinculada() != null)
+                    {
+                        ExibirListaDuplamenteVinculados(gp.RetornarListaDuplamenteVinculada());
+                    }
+                    else
+                    {
+                        Console.WriteLine(" Lista duplamente vinculada vazia !");
+                    }
+                   
                 }
                 else
                 {
-                   // RetornarFila()
+                    if (gp.RetornarFila() != null)
+                    {
+                        ExibirFila(gp.RetornarFila());
+                    }
+                    else
+                    {
+                        Console.WriteLine(" Fila vazia !");
+                    }
+                    
                 }
+            }
+        }
+
+        public static void ExibirListaSimples(List<Produto> listaSimplesProduto)
+        {
+            foreach(Produto produto in listaSimplesProduto)
+            {
+                Console.WriteLine(produto.ToString());
+            }
+        }
+
+        public static void ExibirListaDuplamenteVinculados(LinkedList<Produto> listaDuplamenteVinculados)
+        {
+            foreach (Produto produto in listaDuplamenteVinculados)
+            {
+                Console.WriteLine(produto.ToString());
+            }
+        }
+
+        public static void ExibirFila(Queue<Produto> fila)
+        {
+            foreach (Produto produto in fila)
+            {
+                Console.WriteLine(produto.ToString());
             }
         }
 
@@ -279,7 +329,7 @@ namespace Listas
 
         public static void exibirTotalDeTributoDeImportados(TotalizadorDeTributoProdutoImportado TTProdutoImportado)
         {
-            Console.WriteLine(TTProdutoImportado.AcumuladorTributoProdImportado);
+            Console.WriteLine("Valor total de tributo de importação arrecadado : "+TTProdutoImportado.AcumuladorTributoProdImportado);
         }
        
 

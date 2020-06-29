@@ -11,7 +11,7 @@ namespace Listas
         List<Produto> listarProduto = new List<Produto>();
         LinkedList<Produto> listaProdutoDuplamenteVinculados = new LinkedList<Produto>();
         Queue<Produto> filaProdutos = new Queue<Produto>();
-       
+
         public GerenciarProdutos()
         {
 
@@ -19,16 +19,16 @@ namespace Listas
 
         public void InserirTipoDeProduto(Produto produto, int opcao)
         {
-            if(opcao == 1)
+            if (opcao == 1)
             {
                 listarProduto.Add(produto);
             }
             else
             {
-                if(opcao == 2)
+                if (opcao == 2)
                 {
                     Console.WriteLine("Deseja inserir (1- No inicio) ou (2-No final) ");
-                    if (int.Parse(Console.ReadLine())==1)
+                    if (int.Parse(Console.ReadLine()) == 1)
                     {
                         listaProdutoDuplamenteVinculados.AddFirst(produto);
                     }
@@ -36,7 +36,7 @@ namespace Listas
                     {
                         listaProdutoDuplamenteVinculados.AddLast(produto);
                     }
-                    
+
                 }
                 else
                 {
@@ -47,17 +47,54 @@ namespace Listas
 
         public List<Produto> RetornarListaSimples()
         {
-            return listarProduto;
+            if(ValidarColecao(listarProduto))
+            {
+                return listarProduto;
+            }
+            else
+            {
+                return null;
+            }
+           
         }
 
         public LinkedList<Produto> RetornarListaDuplamenteVinculada()
         {
-            return listaProdutoDuplamenteVinculados;
+            if (ValidarColecao(listaProdutoDuplamenteVinculados))
+            {
+                return listaProdutoDuplamenteVinculados;
+            }
+            else
+            {
+                return null;
+            }
+                
         }
 
         public Queue<Produto> RetornarFila()
         {
-            return filaProdutos;
+            if (filaProdutos.Count==0)
+            {
+                return null;
+            }
+            else
+            {
+                return filaProdutos;
+            }
+               
+        }
+
+        public Boolean ValidarColecao(ICollection<Produto> colecaoProdutos)
+        {
+            if(colecaoProdutos.Count ==0)
+            {
+                return false;
+                //Console.WriteLine(" Lista Vazia ! ");
+            }
+            else
+            {
+                return true;
+            }        
         }
     }
 }

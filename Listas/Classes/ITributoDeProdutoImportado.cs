@@ -5,7 +5,7 @@
  inserirmos esse método nas classes filhas ProdutoImportado e ProdutoImportadoChines pois assim não usariamos
  o recurso Polimorfismo. Precisamos achar uma maneira de "achar um pai em comum" apenas para as classes filhas 
   ProdutoImportado e ProdutoImportadoChines. Mas o que podemos fazer é dizer para o compilador que garantiremos 
-  a existência do método que calcula o valor do tributo de importação  nas classes nessas classes filhas e nas 
+  a existência do método que calcula o valor do tributo de importação  nessas classes filhas e nas 
   proximas que necessitarem desse método. 
   Como fazemos isso? Simples. Fazemos a classe "assinar" um contrato! Nesse caso, queremos assinar o
 contrato que fala que essa classe é Tributável de taxa de importação. Contratos no C# são conhecidos como interfaces. A declaração

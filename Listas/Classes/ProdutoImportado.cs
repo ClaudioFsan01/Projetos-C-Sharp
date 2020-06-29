@@ -88,7 +88,7 @@ namespace Listas
             return (Preco * 0.15M) + (Preco * ImpostoImportacao / 100);
         }
 
-
+    
 
         public override string ToString() //Retorna uma cadeira de caracteres que representa o objeto atual 
         {//Aqui definimos como o objeto será retornado na forma de String
@@ -96,7 +96,7 @@ namespace Listas
                 "- Nome : " + _nome +
                 "- Preço sem a taxa : $ " + Preco.ToString("F2", CultureInfo.InvariantCulture) +
                 "- Taxa de Imposto de importação :  " + ImpostoImportacao.ToString(CultureInfo.InvariantCulture) +" % "+
-                "- Total de tributo de importação : " + CalcularTributoDeImportacao() +
+                "- Total de tributo de importação (Tx de imposto de Importação + 15%) : " + CalcularTributoDeImportacao() +
                 "- Preço com a taxa : $ " + PrecoProdutoComTaxa().ToString("F2", CultureInfo.InvariantCulture) +
                "- Quantidade em estoque : " + QtdEstoque +
                "- Valor total em estoque : $ " + ValorTotalEmEstoque().ToString("F2", CultureInfo.InvariantCulture);

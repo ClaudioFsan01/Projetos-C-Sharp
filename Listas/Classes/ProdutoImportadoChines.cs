@@ -38,7 +38,7 @@ namespace Listas
                 "- Nome : " + _nome +
                 "- Preço sem a taxa : $ " + Preco.ToString("F2", CultureInfo.InvariantCulture) +
                 "- Taxa de Imposto de importação Chines :  " + ImpostoImportacao.ToString(CultureInfo.InvariantCulture) + " % " +
-                "- Total de tributo de importação : " + CalcularTributoDeImportacao()+
+                "- Total de tributo de importação (Tx de imposto de Importação + 20%) : " + CalcularTributoDeImportacao()+
                 "- Preço com a taxa : $ " + PrecoProdutoComTaxa().ToString("F2", CultureInfo.InvariantCulture) +
                "- Quantidade em estoque : " + QtdEstoque +
                "- Valor total em estoque : $ " + ValorTotalEmEstoque().ToString("F2", CultureInfo.InvariantCulture);
