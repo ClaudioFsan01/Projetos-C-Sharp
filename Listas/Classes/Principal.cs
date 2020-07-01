@@ -111,7 +111,14 @@ namespace Listas
                         break;
 
                     case 5:
-                        ExibirRelatorio(gp);
+                        try
+                        {
+                            ExibirRelatorio(gp);
+                        }         
+                        catch (ColecaoVaziaException e)
+                        {
+                            Console.WriteLine(e.Mensagem);
+                        }
 
                         break;
 
@@ -246,66 +253,77 @@ namespace Listas
             Console.WriteLine(" Deseja exibir relatorio de (1-Lista simples) (2-Lista Duplamente Vinculada) (3- Fila): \n");
             int op = int.Parse(Console.ReadLine());
             if (op==1){
-                if(gp.RetornarListaSimples() != null)
-                {
-                    ExibirListaSimples(gp.RetornarListaSimples());
-                }
-                else
-                {
-                    Console.WriteLine(" Lista simples vazia !");
-                }
+
+                ExibirColecao(gp.RetornarListaSimples());          
+              
+                    //Console.WriteLine(" Lista simples vazia !");             
                 
             }
             else
             {
                 if(op == 2)
-                {
-                    if(gp.RetornarListaDuplamenteVinculada() != null)
-                    {
-                        ExibirListaDuplamenteVinculados(gp.RetornarListaDuplamenteVinculada());
-                    }
-                    else
-                    {
-                        Console.WriteLine(" Lista duplamente vinculada vazia !");
-                    }
+                {                    
+                        ExibirColecao(gp.RetornarListaDuplamenteVinculada());                   
+                        //Console.WriteLine(" Lista duplamente vinculada vazia !");                    
                    
                 }
                 else
-                {
-                    if (gp.RetornarFila() != null)
-                    {
-                        ExibirFila(gp.RetornarFila());
-                    }
-                    else
-                    {
-                        Console.WriteLine(" Fila vazia !");
-                    }
+                {                 
+                    
+                        ExibirFila(gp.RetornarFila());           
+                    
+                        //Console.WriteLine(" Fila vazia !");                   
                     
                 }
             }
         }
 
-        public static void ExibirListaSimples(List<Produto> listaSimplesProduto)
+        public static void ExibirColecao(ICollection<Produto> colecao) //Ambas as classes List<T> e LinkedList<T> implementam a interface ICollection<T>
         {
-            foreach(Produto produto in listaSimplesProduto)
+            if(colecao is LinkedList<Produto>)
             {
-                Console.WriteLine(produto.ToString());
+                Console.WriteLine("Deseja exibir do (1-inicio) ou (2-final) ");
+                if (int.Parse(Console.ReadLine()) == 1)
+                {
+                    MostrarColecao(colecao);
+                }
+                else
+                {
+                    colecao.Reverse<Produto>(); // inverte a ordem dos elementos 
+                    MostrarColecao(colecao);
+                }
+
             }
+            else
+            {
+                MostrarColecao(colecao);
+            }             
+            
         }
 
+        public static void MostrarColecao(ICollection<Produto> colecao)
+        {
+            foreach (Produto produto in colecao)
+            {
+                Console.WriteLine(produto.ToString());
+                Console.WriteLine("------------------");
+            }
+        }
+        /*
         public static void ExibirListaDuplamenteVinculados(LinkedList<Produto> listaDuplamenteVinculados)
         {
             foreach (Produto produto in listaDuplamenteVinculados)
             {
                 Console.WriteLine(produto.ToString());
             }
-        }
+        }*/
 
-        public static void ExibirFila(Queue<Produto> fila)
+        public static void ExibirFila(Queue<Produto> fila)  // A classe Queue<T> não implementa a interface ICollection<T>
         {
             foreach (Produto produto in fila)
             {
                 Console.WriteLine(produto.ToString());
+                Console.WriteLine("------------------");
             }
         }
 

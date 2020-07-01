@@ -76,7 +76,7 @@ namespace Listas
         public override decimal PrecoProdutoComTaxa()
         {
            
-            return (Preco * 0.15M) + (Preco*ImpostoImportacao/100) + Preco;
+            return CalcularTributoDeImportacao() + Preco;
             // (base.PrecoProdutoComTaxa()*0.15) + ImpostoImportacao +base.PrecoProdutoComTaxa();
         }
 

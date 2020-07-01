@@ -20,7 +20,7 @@ namespace Listas
         
         public override decimal PrecoProdutoComTaxa()
         {
-            return Preco + (Preco * ImpostoImportacao / 100) + (Preco * 0.2M);
+            return Preco + CalcularTributoDeImportacao();
         }
 
         /* Repare que, para implementarmos o método CalcularTributoDeImportacao() da interface ITributoDeProdutoImportado,

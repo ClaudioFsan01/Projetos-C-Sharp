@@ -47,27 +47,16 @@ namespace Listas
 
         public List<Produto> RetornarListaSimples()
         {
-            if(ValidarColecao(listarProduto))
-            {
-                return listarProduto;
-            }
-            else
-            {
-                return null;
-            }
+            ValidarColecao(listarProduto);           
+                return listarProduto;                      
            
         }
 
         public LinkedList<Produto> RetornarListaDuplamenteVinculada()
         {
-            if (ValidarColecao(listaProdutoDuplamenteVinculados))
-            {
-                return listaProdutoDuplamenteVinculados;
-            }
-            else
-            {
-                return null;
-            }
+            ValidarColecao(listaProdutoDuplamenteVinculados);
+           
+                return listaProdutoDuplamenteVinculados;  
                 
         }
 
@@ -75,26 +64,23 @@ namespace Listas
         {
             if (filaProdutos.Count==0)
             {
-                return null;
+                throw new ColecaoVaziaException(" Fila vazia !");
             }
-            else
-            {
-                return filaProdutos;
-            }
-               
+
+            return filaProdutos;
+
+
         }
 
-        public Boolean ValidarColecao(ICollection<Produto> colecaoProdutos)
+        public void ValidarColecao(ICollection<Produto> colecaoProdutos)
         {
             if(colecaoProdutos.Count ==0)
             {
-                return false;
+                throw new ColecaoVaziaException(" Lista vazia !");
                 //Console.WriteLine(" Lista Vazia ! ");
             }
-            else
-            {
-                return true;
-            }        
+           
+                    
         }
     }
 }

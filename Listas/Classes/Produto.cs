@@ -63,7 +63,8 @@ namespace Listas
             }
             else
             {
-                Console.WriteLine("Preço invalido ! \n");
+                throw new ArgumentException("Preço invalido !");
+                //Console.WriteLine("Preço invalido ! \n");
             }
           
         }
@@ -78,7 +79,7 @@ namespace Listas
             }
             else
             {
-                Console.WriteLine(" Preco ou QtdEstoque com valor invalido ! ");
+                Console.WriteLine(" QtdEstoque com valor invalido ! ");
             }
 
        }
