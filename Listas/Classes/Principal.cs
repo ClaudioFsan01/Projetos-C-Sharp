@@ -44,7 +44,7 @@ namespace Listas
 
         static void Main(string[] args)
         {
-            
+            //OrdenarColecao.ListaString();
             GerenciarProdutos gp = new GerenciarProdutos();
             Produto produto = null;
             TotalizadorDeTributoProdutoImportado TTProdutoImportado = null;
@@ -102,7 +102,7 @@ namespace Listas
                         break;
 
                     case 3:
-
+                        OrdenarColecao(gp);
                         break;
 
                     case 4:
@@ -143,7 +143,7 @@ namespace Listas
             Console.WriteLine(" Menu de Opções : \n" +
                 "1- Cadastrar Produto : \n" +
                 "2- Total de tributos de importação arrecadado: \n" +
-                "3- Adicionar Produto  : \n" +
+                "3- Ordenar Coleção : \n" +
                 "4- Remover Produto \n" +
                 "5- Relatorio de produtos  " +
                 "6- Sair \n");
@@ -246,6 +246,81 @@ namespace Listas
             Console.WriteLine(produto.ToString());
 
             //Console.Write("\n");
+        }
+
+        static void OrdenarColecao(GerenciarProdutos gp)
+        {
+            Console.WriteLine(" Deseja Ordenar (1-Lista simples) (2-Lista Duplamente Vinculada) (3- Fila): \n");
+            int op = int.Parse(Console.ReadLine());
+            if (op == 1)
+            {
+                List<Produto> listaSimples = gp.RetornarListaSimples();
+                op = OpcaoOrdenacao();
+                if(op==1){
+                  
+                    listaSimples.Sort();
+                    MostrarColecao(listaSimples);
+                }
+                else
+                {
+                    if (op == 2)
+                    {
+                        listaSimples.Sort(new OrdenarColecaoPeloPreco());
+                        MostrarColecao(listaSimples);
+                        /*O método de ordenação Sort atraves da instancia da classe  OrdenarColecaoPeloPreco
+                         acessa o método  Compare(Produto produtoAtual, Produto produtoOutro) que recebe dois objetos 
+                         que serão comparados. O proprio método Sort passa esses dois objetos que serão comparados da lista.*/
+                    }
+                    else
+                    {
+                        listaSimples.Sort(new OrdenarColecaoPelaQuantidade1());
+                        MostrarColecao(listaSimples);
+                        /*
+                         O método de ordenação Sort(IComparer<Produto> comparer) recebe um objeto do tipo IComparer<Produto>
+                         a variavel comparer pode fazer referencia a um objeto da classe OrdenarColecaoPelaQuantidade1 com uso de 
+                         polimorfismo uma vez que essa classe implementa a interface IComparer<> e obrigatoriamente implementou o 
+                         método Compare().                      
+                          */
+                    }
+
+                }
+                             
+
+            }
+            else
+            {
+                
+                if (op == 2)
+                {
+                    Console.WriteLine(" Ordenar Lista Duplamente Vinculada \n");
+
+                    op = OpcaoOrdenacao();
+                    if(op == 1)
+                    {
+                        LinkedList<Produto> listaDuplamenteVinculada = gp.RetornarListaDuplamenteVinculada();
+                        //listaDuplamenteVinculada.
+
+                    }
+                    else
+                    {
+
+                    }
+
+
+                }
+                else
+                {
+                    op = OpcaoOrdenacao();
+
+                }
+            }
+
+        }
+
+        static int OpcaoOrdenacao()
+        {
+            Console.WriteLine(" Deseja Ordenar pelo (1-Nome) (2-Preço) (3- Qtd em estoque): \n");
+           return int.Parse(Console.ReadLine());
         }
 
         static void ExibirRelatorio(GerenciarProdutos gp)

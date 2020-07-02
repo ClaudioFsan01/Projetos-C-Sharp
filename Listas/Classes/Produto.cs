@@ -33,7 +33,7 @@ using System.Globalization;
 
 namespace Listas
 {
-    public abstract class Produto // classe abstrata Produto não pode ser instanciada, somente suas classes filhas não abstratas.
+    public abstract class Produto : IComparable<Produto> // classe abstrata Produto não pode ser instanciada, somente suas classes filhas não abstratas.
     {
              
        
@@ -133,7 +133,14 @@ namespace Listas
 
   
        }
+        //ordenando a lista pelo nome       
 
+        public int CompareTo(Produto produto)
+        {
+            return Nome.CompareTo(produto.Nome);
+        }
+
+       
 
        
 }
